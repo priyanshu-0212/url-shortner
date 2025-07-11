@@ -59,6 +59,10 @@ function App() {
           'Authorization': `Bearer ${token}`
         }
       })
+      if(response.status === 401) {
+        handleLogout()
+        throw new Error('Unauthorized access. Please log in again.')
+      }
       const data = await response.json()
       setUrls(data)
     } catch (error) {
